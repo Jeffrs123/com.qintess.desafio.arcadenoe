@@ -18,7 +18,8 @@ public interface AtendimentoMapper {
 	@Mappings({
 		@Mapping(target = "day", source = "day", dateFormat = "dd-MM-yyyy"),
 		@Mapping(target = "startTime", source = "startTime", dateFormat = "HH:mm"),
-		@Mapping(target="endTime", expression="java(atendimentodto.getStartTime().plusHours(1))")
+		@Mapping(target = "endTime", source = "startTime", dateFormat = "HH:mm")
+//		@Mapping(target="endTime", expression="java(atendimentodto.getStartTime().plusHours(1))")
 		
 	})
 	Atendimento toModel(AtendimentoDTO atendimentodto);

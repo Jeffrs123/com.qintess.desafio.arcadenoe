@@ -32,46 +32,24 @@ import lombok.AllArgsConstructor;
 })
 @RestController
 @RequestMapping("/api/v1/pet")
-//@AllArgsConstructor(onConstructor = @__(@Autowired))
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PetController {
 
 	private final PetService petService;
 
-	@Autowired
-	public PetController(PetService petService) {
-		this.petService = petService;
-	}
-
-	//	@PostMapping
-	//	@ResponseStatus(HttpStatus.CREATED)
-	//	public MessageResponseDTO create2(@RequestBody @Valid PetDTO petDTO) {
-	//		return petService.create(petDTO);
-	//	}
-
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public MessageResponseDTO create(@RequestBody Pet pet) {
-		System.out.println("Vamos criar pet: " + pet);
-		return petService.create(pet);
+	public MessageResponseDTO create(@RequestBody @Valid PetDTO petDTO) {
+		return petService.create(petDTO);
 	}
 
-	//	@GetMapping
-	//	public List<PetDTO> listAll() {
-	//		return petService.listAll2();
-	//	}
-
 	@GetMapping
-	public List<Pet> listAll() {
+	public List<PetDTO> listAll() {
 		return petService.listAll();
 	}
 
-	//	@GetMapping("/{id}")
-	//	public Pet findById2(@PathVariable Long id) throws PetNotFoundException {
-	//		return petService.findById2(id);
-	//	}
-
 	@GetMapping("/{id}")
-	public Pet findById(@PathVariable Long id) throws PetNotFoundException {
+	public PetDTO findById(@PathVariable Long id) throws PetNotFoundException {
 		return petService.findById(id);
 	}
 
@@ -82,14 +60,8 @@ public class PetController {
 	}
 
 	@PutMapping("/{id}")
-	public MessageResponseDTO updateById(@PathVariable Long id, @RequestBody Pet pet) throws PetNotFoundException, UpdateNotAllowedException {
-		return petService.updateById(id, pet);
+	public MessageResponseDTO updateById(@PathVariable Long id, @RequestBody PetDTO petDTO) throws PetNotFoundException, UpdateNotAllowedException {
+		return petService.updateById(id, petDTO);
 	}
-	
-//	@PutMapping("/{id}")
-//	public MessageResponseDTO updateById2(@PathVariable Long id, @RequestBody @Valid PetDTO petDTO) throws PetNotFoundException {
-//		return petService.updateById2(id, petDTO);
-//	}
-
 
 }

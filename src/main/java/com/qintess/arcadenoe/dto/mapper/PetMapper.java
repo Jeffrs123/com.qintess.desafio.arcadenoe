@@ -9,7 +9,7 @@ import com.qintess.arcadenoe.entity.Pet;
 @Mapper//(componentModel = "spring")
 public interface PetMapper {
 
-//	PetMapper INSTANCE = Mappers.getMapper( PetMapper.class );
+	PetMapper INSTANCE = Mappers.getMapper( PetMapper.class );
 
 	Pet toModel(PetDTO pet);
 	

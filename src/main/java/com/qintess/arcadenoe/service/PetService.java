@@ -19,58 +19,33 @@ import com.qintess.arcadenoe.repository.PetRepository;
 import lombok.AllArgsConstructor;
 
 @Service
-//@AllArgsConstructor(onConstructor = @__(@Autowired))
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PetService {
 
 	private final PetRepository petRepository;
 
-	//	private final PetMapper petMapper;// = PetMapper.INSTANCE;
+	private final PetMapper petMapper = PetMapper.INSTANCE;
 
-	@Autowired
-	public PetService(PetRepository petRepository) {
-		this.petRepository = petRepository;
-	}
-
-	//	public MessageResponseDTO create2(PetDTO petDTO) {
-	//		Pet petToSave = petMapper.toModel(petDTO);
-	//		
-	//		Pet pet = petRepository.save(petToSave);
-	//		
-	//		return MessageResponseDTO
-	//				.builder()
-	//				.message("Pet criado com ID " + pet.getId() + ".")
-	//				.build();
-	//	}
-
-	public MessageResponseDTO create(Pet pet) {
-
-		Pet createdPet = petRepository.save(pet);
+	public MessageResponseDTO create(PetDTO petDTO) {
+		
+		Pet petToSave = petMapper.toModel(petDTO);
+		Pet createdPet = petRepository.save(petToSave);
+		
 		return createMessageResponse(createdPet.getId(), "Pet criado com ID");
 	}
 
-
-	//	public List<PetDTO> listAll2() {
-	//		List<Pet> allPet = petRepository.findAll();
-	//		return allPet
-	//				.stream()
-	//				.map(petMapper::toDTO)
-	//				.collect(Collectors.toList())
-	//		;
-	//	}
-
-	public List<Pet> listAll() {
+	public List<PetDTO> listAll() {
 		List<Pet> allPet = petRepository.findAll();
-		return allPet;
+		return allPet
+				.stream()
+				.map(petMapper::toDTO)
+				.collect(Collectors.toList())
+				;
 	}
 
-	//	public Pet findById2(Long id) throws PetNotFoundException {
-	//		  Pet pet = verifyIfExists(id);
-	//		return petMapper.toDTO(pet);
-	//	}
-
-	public Pet findById(Long id) throws PetNotFoundException {
+	public PetDTO findById(Long id) throws PetNotFoundException {
 		Pet pet = verifyIfExists(id);
-		return pet;
+		return petMapper.toDTO(pet);
 	}
 
 	public void delete(Long id) throws PetNotFoundException {
@@ -78,36 +53,23 @@ public class PetService {
 		petRepository.deleteById(id);
 	}
 
-	
-
-//	public MessageResponseDTO updateById2(Long id, PetDTO petDTO) throws PetNotFoundException {
-//
-//		verifyIfExists(id);
-//
-//		Pet petToUpdate = petMapper.toModel(petDTO);
-//		
-//		Pet updatedPet = petRepository.save(petToUpdate);
-//
-//		return createMessageResponse(updatedPet.getId(), "Pet atualizado com ID");
-//	}
-
-
-	public MessageResponseDTO updateById(Long id, Pet pet) throws PetNotFoundException, UpdateNotAllowedException {
+	public MessageResponseDTO updateById(Long id, PetDTO petDTO) throws PetNotFoundException, UpdateNotAllowedException {
 
 		verifyIfExists(id);
-		verifyPathVariableAndId(id, pet.getId());
-		
-		Pet updatedPet = petRepository.save(pet);
+		verifyPathVariableAndId(id, petDTO.getId());
 
+		Pet petToUpdate = petMapper.toModel(petDTO);
+		Pet updatedPet = petRepository.save(petToUpdate);
+		
 		return createMessageResponse(updatedPet.getId(), " Pet atualizado com ID    ");
 	}
-	
+
 	private void verifyPathVariableAndId(Long id, Long petid) throws UpdateNotAllowedException{
 		if (id != petid)
 			throw new UpdateNotAllowedException(id, petid);
-		
+
 	}
-	
+
 	private Pet verifyIfExists(Long id) throws PetNotFoundException {
 		return petRepository
 				.findById(id)

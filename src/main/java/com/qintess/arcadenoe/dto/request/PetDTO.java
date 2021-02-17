@@ -40,11 +40,9 @@ public class PetDTO {
 	
 	private List<Atendimento> atendimentos;
 
-	// @NotEmpty
 	@Size(min = 1, max = 20)
 	private String especie; // Criar classe Especie
 	
-	//	@NotEmpty
 	@Size(min = 1, max = 20)
 	private String raca; // Criar classe Raça
 }
