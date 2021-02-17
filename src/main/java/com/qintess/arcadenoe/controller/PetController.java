@@ -62,9 +62,8 @@ public class PetController {
 		return petService.listAll();
 	}
 
-
 	//	@GetMapping("/{id}")
-	//	public PetDTO findById(@PathVariable Long id) {
+	//	public Pet findById2(@PathVariable Long id) throws PetNotFoundException {
 	//		return petService.findById2(id);
 	//	}
 
@@ -72,6 +71,8 @@ public class PetController {
 	public Pet findById(@PathVariable Long id) throws PetNotFoundException {
 		return petService.findById(id);
 	}
+
+
 
 
 }

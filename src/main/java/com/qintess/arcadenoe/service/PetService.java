@@ -65,19 +65,22 @@ public class PetService {
 		List<Pet> allPet = petRepository.findAll();
 		return allPet;
 	}
-
-	//	public Pet findById2(Long id) {
-	//		Optional<Pet> optionalPet = petRepository.findById(id);
-	//		return petMapper.toDTO( optionalPet.get());
-	//	}
+	
+//	public Pet findById2(Long id) throws PetNotFoundException {
+//		 Pet pet = petRepository
+//			.findById(id)
+//			.orElseThrow(() -> new PetNotFoundException(id))
+//		;
+//		return petMapper.toDTO(pet);
+//	}
 
 	public Pet findById(Long id) throws PetNotFoundException {
-		Optional<Pet> optionalPet = petRepository.findById(id);
-		
-		if (optionalPet.isEmpty()) {
-			throw new PetNotFoundException(id);			
-		}
-		return optionalPet.get();
+		 Pet pet = petRepository
+			.findById(id)
+			.orElseThrow(() -> new PetNotFoundException(id))
+		;
+		return pet;
 	}
 
+	
 }
