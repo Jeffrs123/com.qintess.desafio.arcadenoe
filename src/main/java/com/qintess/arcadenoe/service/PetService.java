@@ -12,7 +12,7 @@ import com.qintess.arcadenoe.dto.mapper.PetMapper;
 import com.qintess.arcadenoe.dto.request.PetDTO;
 import com.qintess.arcadenoe.dto.response.MessageResponseDTO;
 import com.qintess.arcadenoe.entity.Pet;
-import com.qintess.arcadenoe.exception.NotAllowedException;
+import com.qintess.arcadenoe.exception.UpdateNotAllowedException;
 import com.qintess.arcadenoe.exception.PetNotFoundException;
 import com.qintess.arcadenoe.repository.PetRepository;
 
@@ -92,7 +92,7 @@ public class PetService {
 //	}
 
 
-	public MessageResponseDTO updateById(Long id, Pet pet) throws PetNotFoundException, NotAllowedException {
+	public MessageResponseDTO updateById(Long id, Pet pet) throws PetNotFoundException, UpdateNotAllowedException {
 
 		verifyIfExists(id);
 		verifyPathVariableAndId(id, pet.getId());
@@ -102,9 +102,9 @@ public class PetService {
 		return createMessageResponse(updatedPet.getId(), " Pet atualizado com ID    ");
 	}
 	
-	private void verifyPathVariableAndId(Long id, Long petid) throws NotAllowedException{
+	private void verifyPathVariableAndId(Long id, Long petid) throws UpdateNotAllowedException{
 		if (id != petid)
-			throw new NotAllowedException(id, petid);
+			throw new UpdateNotAllowedException(id, petid);
 		
 	}
 	

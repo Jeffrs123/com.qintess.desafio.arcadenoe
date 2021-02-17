@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.qintess.arcadenoe.dto.request.PetDTO;
 import com.qintess.arcadenoe.dto.response.MessageResponseDTO;
 import com.qintess.arcadenoe.entity.Pet;
-import com.qintess.arcadenoe.exception.NotAllowedException;
+import com.qintess.arcadenoe.exception.UpdateNotAllowedException;
 import com.qintess.arcadenoe.exception.PetNotFoundException;
 import com.qintess.arcadenoe.service.PetService;
 
@@ -82,7 +82,7 @@ public class PetController {
 	}
 
 	@PutMapping("/{id}")
-	public MessageResponseDTO updateById(@PathVariable Long id, @RequestBody Pet pet) throws PetNotFoundException, NotAllowedException {
+	public MessageResponseDTO updateById(@PathVariable Long id, @RequestBody Pet pet) throws PetNotFoundException, UpdateNotAllowedException {
 		return petService.updateById(id, pet);
 	}
 	
