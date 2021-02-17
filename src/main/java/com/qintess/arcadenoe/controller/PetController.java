@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.qintess.arcadenoe.dto.request.PetDTO;
 import com.qintess.arcadenoe.dto.response.MessageResponseDTO;
 import com.qintess.arcadenoe.entity.Pet;
+import com.qintess.arcadenoe.exception.NotAllowedException;
 import com.qintess.arcadenoe.exception.PetNotFoundException;
 import com.qintess.arcadenoe.service.PetService;
 
@@ -79,6 +81,15 @@ public class PetController {
 		petService.delete(id);
 	}
 
+	@PutMapping("/{id}")
+	public MessageResponseDTO updateById(@PathVariable Long id, @RequestBody Pet pet) throws PetNotFoundException, NotAllowedException {
+		return petService.updateById(id, pet);
+	}
+	
+//	@PutMapping("/{id}")
+//	public MessageResponseDTO updateById2(@PathVariable Long id, @RequestBody @Valid PetDTO petDTO) throws PetNotFoundException {
+//		return petService.updateById2(id, petDTO);
+//	}
 
 
 }
