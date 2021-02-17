@@ -67,19 +67,25 @@ public class PetService {
 	}
 	
 //	public Pet findById2(Long id) throws PetNotFoundException {
-//		 Pet pet = petRepository
-//			.findById(id)
-//			.orElseThrow(() -> new PetNotFoundException(id))
-//		;
+//		  Pet pet = verifyIfExists(id);
 //		return petMapper.toDTO(pet);
 //	}
 
 	public Pet findById(Long id) throws PetNotFoundException {
-		 Pet pet = petRepository
-			.findById(id)
-			.orElseThrow(() -> new PetNotFoundException(id))
-		;
+		 Pet pet = verifyIfExists(id);
 		return pet;
+	}
+
+	public void delete(Long id) throws PetNotFoundException {
+		verifyIfExists(id);
+		petRepository.deleteById(id);
+	}
+	
+	private Pet verifyIfExists(Long id) throws PetNotFoundException {
+		return petRepository
+				.findById(id)
+				.orElseThrow(() -> new PetNotFoundException(id))
+			;
 	}
 
 	
