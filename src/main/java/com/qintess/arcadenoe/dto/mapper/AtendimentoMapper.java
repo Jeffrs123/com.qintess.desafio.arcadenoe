@@ -1,9 +1,28 @@
 package com.qintess.arcadenoe.dto.mapper;
 
-public interface AtendimentoMapper {
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.factory.Mappers;
 
-//	@Mapping(target = "birthDate", source = "birthDate", dateFormat = "dd-MM-yyyy")
-//    Person toModel(PersonDTO dto);
-//
-//    PersonDTO toDTO(Person dto);
+import com.qintess.arcadenoe.dto.request.AtendimentoDTO;
+import com.qintess.arcadenoe.entity.Atendimento;
+
+@Mapper//(componentModel = "spring") // Anotação que informa que é uma classe que o Mapper vai processar
+public interface AtendimentoMapper {
+	
+	AtendimentoMapper INSTANCE = Mappers.getMapper( AtendimentoMapper.class );
+//	AtendimentoMapper INSTANCE = Mappers.getMapper(AtendimentoMapper.class);
+
+	
+	@Mappings({
+		@Mapping(target = "day", source = "day", dateFormat = "dd-MM-yyyy"),
+		@Mapping(target = "startTime", source = "startTime", dateFormat = "HH:mm"),
+		@Mapping(target="endTime", expression="java(atendimentodto.getStartTime().plusHours(1))")
+		
+	})
+	Atendimento toModel(AtendimentoDTO atendimentodto);
+	
+	AtendimentoDTO toDTO(Atendimento atendimento);
+
 }

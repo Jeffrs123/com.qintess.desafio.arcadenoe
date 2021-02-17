@@ -37,8 +37,10 @@ public class Pet {
 	@OneToMany(fetch = FetchType.LAZY)
 	private List<Atendimento> atendimentos;
 
-	
+	@Column(nullable = true)
 	private String especie; // Criar classe Especie
+	
+	@Column(nullable = true)
 	private String raca; // Criar classe Raça
 
 }

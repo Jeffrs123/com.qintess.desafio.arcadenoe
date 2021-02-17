@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -34,10 +35,13 @@ public class Atendimento {
 	private Long id;
 	
 	@Column(nullable = false)
-	private LocalDateTime startTime;
+	private LocalDate day;
 	
 	@Column(nullable = false)
-	private LocalDateTime endTime;
+	private LocalTime startTime;
+	
+	@Column(nullable = true)
+	private LocalTime endTime;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
@@ -54,11 +58,12 @@ public class Atendimento {
 	@Column(nullable = true)
 	private String observacao;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Pet pet;
 	
-	// Setter com lógica própria.
-	public void setEndTime(String endTime) {
-		this.endTime = startTime.plusHours(1);
-	}
+//	// Setter com lógica própria.
+//	public void setEndTime(String endTime) {
+//		this.endTime = startTime.plusHours(1);
+//	}
+	
 }
