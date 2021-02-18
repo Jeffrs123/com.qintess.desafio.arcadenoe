@@ -28,6 +28,7 @@ import lombok.AllArgsConstructor;
 //		"https://arcadenoecliente.herokuapp.com"
 //		})
 @RestController
+@CrossOrigin(origins = "https://arcadenoecliente.herokuapp.com")
 @RequestMapping("/api/v1/atendimento")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AtendimentoController {

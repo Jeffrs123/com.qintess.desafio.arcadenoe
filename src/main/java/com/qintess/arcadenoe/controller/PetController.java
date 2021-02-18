@@ -27,12 +27,9 @@ import lombok.AllArgsConstructor;
 
 //@CrossOrigin(originPatterns = "https://arcadenoecliente.herokuapp.com")
 @RestController
+@CrossOrigin(origins = "https://arcadenoecliente.herokuapp.com")
 @RequestMapping("/api/v1/pet")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-@CrossOrigin(origins = {
-		"http://localhost:4200", 
-		"https://arcadenoecliente.herokuapp.com"
-})
 public class PetController {
 
 	private final PetService petService;
