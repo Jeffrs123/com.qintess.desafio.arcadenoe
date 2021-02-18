@@ -22,10 +22,10 @@
 		<org.projectlombok.version>1.18.16</org.projectlombok.version>
 	</properties>
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -49,9 +49,9 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>${org.projectlombok.version}</version>
+			<!-- <version>${org.projectlombok.version}</version> -->
 			<optional>true</optional>
-			<scope>provided</scope>
+			<!-- <scope>provided</scope> -->
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
 		<!-- Cuida das validações dos dado no Banco -->
@@ -79,21 +79,10 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.1</version>
+					<!-- <version>3.8.1</version> -->
 					<configuration>
 						<source>${java.version}</source>
 						<target>${java.version}</target>
-						<!-- See https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html -->
-						<!-- Classpath elements to supply as annotation processor path. If 
-							specified, the compiler -->
-						<!-- will detect annotation processors only in those classpath elements. 
-							If omitted, the -->
-						<!-- default classpath is used to detect annotation processors. The 
-							detection itself depends -->
-						<!-- on the configuration of annotationProcessors. -->
-						<!-- -->
-						<!-- According to this documentation, the provided dependency processor 
-							is not considered! -->
 						<annotationProcessorPaths>
 							<path>
 								<groupId>org.mapstruct</groupId>
