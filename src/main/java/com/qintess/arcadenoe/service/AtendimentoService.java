@@ -1,5 +1,8 @@
 package com.qintess.arcadenoe.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,38 +18,37 @@ import com.qintess.arcadenoe.repository.AtendimentoRepository;
 import lombok.AllArgsConstructor;
 
 @Service
-//@AllArgsConstructor(onConstructor = @__(@Autowired))
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AtendimentoService {
 
 	private final AtendimentoRepository atendimentoRepository;
 
-//	private final AtendimentoMapper atendimentoMapper = AtendimentoMapper.INSTANCE;
+	private final AtendimentoMapper atendimentoMapper = AtendimentoMapper.INSTANCE;
 
-	@Autowired
-	public AtendimentoService(AtendimentoRepository atendimentoRepository) {
-		this.atendimentoRepository = atendimentoRepository;
+
+	public MessageResponseDTO create( AtendimentoDTO atendimentoDTO) {
+
+		Atendimento atendimentoToSave = atendimentoMapper.toModel(atendimentoDTO);
+		atendimentoToSave.setEndTime(atendimentoToSave.getStartTime());
+
+		Atendimento createdAtendimento = atendimentoRepository.save(atendimentoToSave);
+
+		return createMessageResponse(createdAtendimento.getId(), "Atendimento criado com ID");
 	}
-
-//	public MessageResponseDTO create( AtendimentoDTO atendimentoDTO) {
-//
-//		Atendimento atendimentoToSave = atendimentoMapper.toModel(atendimentoDTO);
-//
-//		Atendimento at = atendimentoRepository.save(atendimentoToSave);
-//
-//		return MessageResponseDTO
-//				.builder()
-//				.message("Atendimento criado com ID " + at.getId() + ".")
-//				.build();
-//	}
-	public MessageResponseDTO create( Atendimento atendimento) {
-
-		System.out.println("create atendimento normal");
-
-		Atendimento at = atendimentoRepository.save(atendimento);
-
+	
+	public List<AtendimentoDTO> listAll() {
+		List<Atendimento> allAtendimento = atendimentoRepository.findAll();
+		return allAtendimento
+				.stream()
+				.map(atendimentoMapper::toDTO)
+				.collect(Collectors.toList())
+				;
+	}
+	
+	private MessageResponseDTO createMessageResponse(Long id, String message) {
 		return MessageResponseDTO
 				.builder()
-				.message("Atendimento criado com ID " + at.getId() + ".")
+				.message(message.trim() + " " + id + ".")
 				.build();
 	}
 }

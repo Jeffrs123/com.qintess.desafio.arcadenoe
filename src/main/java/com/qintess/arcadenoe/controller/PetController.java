@@ -19,17 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qintess.arcadenoe.dto.request.PetDTO;
 import com.qintess.arcadenoe.dto.response.MessageResponseDTO;
-import com.qintess.arcadenoe.entity.Pet;
 import com.qintess.arcadenoe.exception.UpdateNotAllowedException;
 import com.qintess.arcadenoe.exception.PetNotFoundException;
 import com.qintess.arcadenoe.service.PetService;
 
 import lombok.AllArgsConstructor;
 
-@CrossOrigin(origins = {
-		"http://localhost:4200", 
-		"https://arcadenoecliente.herokuapp.com"
-})
+@CrossOrigin(origins = //{
+		"http://localhost:4200"//, 
+//		"https://arcadenoecliente.herokuapp.com"
+//}
+)
 @RestController
 @RequestMapping("/api/v1/pet")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
