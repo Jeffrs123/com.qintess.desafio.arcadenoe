@@ -25,13 +25,14 @@ import com.qintess.arcadenoe.service.PetService;
 
 import lombok.AllArgsConstructor;
 
-//@CrossOrigin(origins = {
-//		"http://localhost:4200", 
-//		"https://arcadenoecliente.herokuapp.com"
-//})
+//@CrossOrigin(originPatterns = "https://arcadenoecliente.herokuapp.com")
 @RestController
 @RequestMapping("/api/v1/pet")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
+@CrossOrigin(origins = {
+		"http://localhost:4200", 
+		"https://arcadenoecliente.herokuapp.com"
+})
 public class PetController {
 
 	private final PetService petService;
