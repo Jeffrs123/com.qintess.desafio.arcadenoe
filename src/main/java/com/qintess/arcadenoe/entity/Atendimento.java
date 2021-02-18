@@ -1,7 +1,6 @@
 package com.qintess.arcadenoe.entity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.CascadeType;
@@ -25,6 +24,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+//@Data
+//@Builder
 @Data
 @Builder
 @AllArgsConstructor
